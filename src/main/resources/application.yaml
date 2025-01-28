@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: city-management
+  datasource:
+    url: ${POSTGRESQL_DB_HOST}:${POSTGRESQL_DB_PORT}/postgres
+    username: ${POSTGRESQL_DB_USERNAME}
+    password: ${POSTGRESQL_DB_PASSWORD}
+    driverClassName: ${POSTGRESQL_DB_DRIVER}
+  jpa:
+    database-platform: ${POSTGRESQL_DB_PLATFORM}
+    hibernate:
+      ddl-auto: update
