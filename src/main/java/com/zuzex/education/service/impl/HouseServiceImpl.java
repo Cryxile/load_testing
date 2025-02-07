@@ -1,9 +1,11 @@
 package com.zuzex.education.service.impl;
 
 import com.zuzex.education.exception.HouseNotFoundException;
-import com.zuzex.education.model.House;
+import com.zuzex.education.model.db.House;
+import com.zuzex.education.model.db.Person;
 import com.zuzex.education.repository.HouseRepository;
 import com.zuzex.education.service.HouseService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +23,29 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public List<Person> getAllByHouseStreet(String street) {
+        return houseRepository.getAllByHouseStreet(street);
+    }
+
+    @Override
     public House get(UUID id) {
         return houseRepository.findById(id).orElseThrow(() -> new HouseNotFoundException(id));
     }
 
     @Override
-    public House create(House house) {
+    public House addOwnersToHouse(House house) {
+        UUID houseId = house.getId();
         return houseRepository.save(
-                house.toBuilder()
-                        .id(UUID.randomUUID())
+                houseRepository.findById(houseId).orElseThrow(() -> new HouseNotFoundException(houseId))
+                        .toBuilder()
+                        .owners(house.getOwners())
                         .build()
         );
+    }
+
+    @Override
+    public House create(House house) {
+        return houseRepository.save(house);
     }
 
     @Override
@@ -40,7 +54,9 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
+        houseRepository.deleteFromPeopleHouses(id);
         houseRepository.deleteById(id);
     }
 }

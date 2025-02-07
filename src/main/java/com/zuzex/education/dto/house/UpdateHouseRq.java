@@ -1,15 +1,16 @@
-package com.zuzex.education.dto;
+package com.zuzex.education.dto.house;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.extern.jackson.Jacksonized;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -17,18 +18,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class HouseDTO {
+public class UpdateHouseRq {
+    @NotNull
     private UUID id;
 
     @NotBlank
     @Size(min = 1, max = 9)
     private String wallMaterial;
 
-    @NotBlank
     @PastOrPresent
-    private Date buildDate;
+    private LocalDate buildDate;
 
+    @NotNull
     private Boolean hasGasSupply;
-
-    private UUID addressId;
 }

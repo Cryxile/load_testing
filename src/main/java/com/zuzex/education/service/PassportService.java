@@ -1,12 +1,14 @@
 package com.zuzex.education.service;
 
-import com.zuzex.education.model.Passport;
+import com.zuzex.education.model.db.Passport;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface PassportService {
     List<Passport> getAll();
+
+    List<Passport> getAllByMaleLastNameFirstCharacter(Character initial);
 
     Passport get(UUID id);
 
@@ -15,4 +17,6 @@ public interface PassportService {
     Passport update(Passport passport);
 
     void delete(UUID id);
+
+    void deleteByOwner(UUID ownerId);
 }

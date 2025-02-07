@@ -1,7 +1,7 @@
 package com.zuzex.education.service.impl;
 
 import com.zuzex.education.exception.CarNotFoundException;
-import com.zuzex.education.model.Car;
+import com.zuzex.education.model.db.Car;
 import com.zuzex.education.repository.CarRepository;
 import com.zuzex.education.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public List<Car> getAllByOwner(UUID ownerId) {
+        return carRepository.getAllByOwner(ownerId);
+    }
+
+    @Override
     public Car get(UUID id) {
         return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
     }
@@ -28,8 +33,12 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car create(Car car) {
         return carRepository.save(
-                car.toBuilder()
+                Car.builder()
                         .id(UUID.randomUUID())
+                        .brand(car.getBrand())
+                        .model(car.getModel())
+                        .color(car.getColor())
+                        .owner(car.getOwner())
                         .build()
         );
     }
@@ -42,5 +51,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(UUID id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByOwner(UUID ownerId) {
+        carRepository.deleteByOwner(ownerId);
     }
 }

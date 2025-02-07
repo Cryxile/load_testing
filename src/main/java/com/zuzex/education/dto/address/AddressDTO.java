@@ -1,12 +1,13 @@
-package com.zuzex.education.dto;
+package com.zuzex.education.dto.address;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.extern.jackson.Jacksonized;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class AddressDTO {
+    @NotNull
     private UUID id;
 
     @NotBlank

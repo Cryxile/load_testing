@@ -1,7 +1,7 @@
 package com.zuzex.education.service.impl;
 
 import com.zuzex.education.exception.PersonNotFoundException;
-import com.zuzex.education.model.Person;
+import com.zuzex.education.model.db.Person;
 import com.zuzex.education.repository.PersonRepository;
 import com.zuzex.education.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +26,24 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person addHouseToPerson(Person person) {
+        UUID personId = person.getId();
+        return personRepository.save(
+                personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId))
+                        .toBuilder()
+                        .houses(person.getHouses())
+                        .build()
+        );
+    }
+
+    @Override
     public Person create(Person person) {
         return personRepository.save(
-                person.toBuilder()
+                Person.builder()
                         .id(UUID.randomUUID())
+                        .height(person.getHeight())
+                        .weight(person.getWeight())
+                        .hairColor(person.getHairColor())
                         .build()
         );
     }
@@ -40,7 +54,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void deleteFromPeopleHouses(UUID id) {
+        personRepository.deleteFromPeopleHouses(id);
+    }
+
+    @Override
+    public void deleteFromPeople(UUID id) {
         personRepository.deleteById(id);
     }
 }

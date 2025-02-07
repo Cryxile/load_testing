@@ -7,6 +7,6 @@ spring:
     password: ${POSTGRESQL_DB_PASSWORD}
     driverClassName: ${POSTGRESQL_DB_DRIVER}
   jpa:
-    database-platform: ${POSTGRESQL_DB_PLATFORM}
+    show-sql: true
     hibernate:
       ddl-auto: update

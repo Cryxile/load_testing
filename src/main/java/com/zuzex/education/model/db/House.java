@@ -1,20 +1,20 @@
-package com.zuzex.education.model;
+package com.zuzex.education.model.db;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.Table;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,22 +29,22 @@ public class House {
     @Id
     private UUID id;
 
-    @Column(name = "wall_material")
+    @Column(length = 9, nullable = false)
     private String wallMaterial;
 
-    @Column(name = "build_date")
-    private Date buildDate;
+    @Column(nullable = false)
+    private LocalDate buildDate;
 
-    @Column(name = "has_gas_supply")
+    @Column(nullable = false)
     private Boolean hasGasSupply;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
+    @OneToOne
+    @JoinColumn(name = "address_id", nullable = false, updatable = false)
     private Address address;
 
     @ManyToMany
     @JoinTable(name = "people_houses",
-            joinColumns = @JoinColumn(name = "house_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "house_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false))
     private Set<Person> owners;
 }

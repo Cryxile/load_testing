@@ -1,6 +1,6 @@
 package com.zuzex.education.service;
 
-import com.zuzex.education.model.Address;
+import com.zuzex.education.model.db.Address;
 
 import java.util.List;
 import java.util.UUID;
