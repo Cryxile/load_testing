@@ -1,7 +1,8 @@
-package com.zuzex.education.dto;
+package com.zuzex.education.dto.house;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.extern.jackson.Jacksonized;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Builder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -17,19 +18,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class PassportDTO {
+public class HouseDTO {
+    @NotNull
     private UUID id;
 
     @NotBlank
-    @Size(min = 2, max = 15)
-    private String firstName;
+    @Size(min = 1, max = 9)
+    private String wallMaterial;
 
-    @NotBlank
-    @Size(min = 2, max = 15)
-    private String lastName;
+    @NotNull
+    @PastOrPresent
+    private LocalDate buildDate;
 
-    @Past
-    private Date birthDate;
+    @NotNull
+    private Boolean hasGasSupply;
 
+    @NotNull
     private UUID addressId;
 }

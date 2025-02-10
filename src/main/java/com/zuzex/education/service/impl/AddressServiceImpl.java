@@ -1,7 +1,7 @@
 package com.zuzex.education.service.impl;
 
 import com.zuzex.education.exception.AddressNotFoundException;
-import com.zuzex.education.model.Address;
+import com.zuzex.education.model.db.Address;
 import com.zuzex.education.repository.AddressRepository;
 import com.zuzex.education.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +27,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address create(Address address) {
-        return addressRepository.save(
-                address.toBuilder()
-                        .id(UUID.randomUUID())
-                        .build()
-        );
+        return addressRepository.save(address);
     }
 
     @Override

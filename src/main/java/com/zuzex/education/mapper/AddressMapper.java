@@ -1,16 +1,20 @@
 package com.zuzex.education.mapper;
 
-import com.zuzex.education.dto.AddressDTO;
-import com.zuzex.education.model.Address;
+import com.zuzex.education.config.MapperConfiguration;
+import com.zuzex.education.dto.address.AddressDTO;
+import com.zuzex.education.dto.address.GetAddressListRs;
+import com.zuzex.education.model.db.Address;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(config = MapperConfiguration.class)
 public interface AddressMapper {
-    Address mapAddressDtoToAddress(AddressDTO addressDto);
+    Address map(AddressDTO source);
 
-    AddressDTO mapAddressToAddressDto(Address address);
+    AddressDTO map(Address source);
 
-    List<AddressDTO> mapAddressToAddressDto(List<Address> addresses);
+    default GetAddressListRs map(List<Address> source) {
+        return GetAddressListRs.builder().list(source.stream().map(this::map).toList()).build();
+    }
 }

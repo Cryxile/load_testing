@@ -1,15 +1,17 @@
-package com.zuzex.education.model;
+package com.zuzex.education.model.db;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Builder;
 
 import java.util.UUID;
 
@@ -18,19 +20,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder(toBuilder = true)
+@NamedQuery(
+        name = "Car.getAllByOwner",
+        query = "FROM Car c WHERE c.owner.id = :ownerId"
+)
 @Entity
 @Table(name = "cars")
 public class Car {
     @Id
     private UUID id;
 
+    @Column(length = 9, nullable = false)
     private String brand;
 
+    @Column(length = 9, nullable = false)
     private String model;
 
+    @Column(length = 15, nullable = false)
     private String color;
 
-    @OneToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
     private Person owner;
 }

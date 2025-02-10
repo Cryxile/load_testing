@@ -1,20 +1,49 @@
 package com.zuzex.education.mapper;
 
-import com.zuzex.education.dto.PersonDTO;
-import com.zuzex.education.model.Person;
+import com.zuzex.education.config.MapperConfiguration;
+import com.zuzex.education.dto.person.PersonDTO;
+import com.zuzex.education.dto.person.AddToPersonRq;
+import com.zuzex.education.dto.person.AddToPersonRs;
+import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.model.db.House;
+import com.zuzex.education.model.db.Person;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+
+@Mapper(config = MapperConfiguration.class)
 public interface PersonMapper {
-    @Mapping(source = "passportId", target = "passport.id")
-    Person mapPersonDtoToPerson(PersonDTO personDTO);
+    Person map(PersonDTO source);
 
-    @Mapping(source = "passport.id", target = "passportId")
-    PersonDTO mapPersonToPersonDto(Person person);
+    PersonDTO map(Person source);
 
-    @Mapping(source = "passport.id", target = "passportId")
-    List<PersonDTO> mapPersonToPersonDto(List<Person> person);
+    @Mapping(target = "id", source = "personId")
+    Person map(AddToPersonRq source);
+
+    AddToPersonRs mapRs(Person source);
+
+    default GetPersonListRs map(List<Person> source) {
+        return GetPersonListRs.builder().list(source.stream().map(this::map).toList()).build();
+    }
+
+    @AfterMapping
+    default AddToPersonRs convertIntoId(Person source, @MappingTarget AddToPersonRs target) {
+        return target.toBuilder()
+                .ownedHouses(source.getHouses().stream().map(House::getId).collect(Collectors.toSet()))
+                .build();
+    }
+
+    @AfterMapping
+    default Person convertIntoHouse(AddToPersonRq source, @MappingTarget Person target) {
+        Set<House> houses = source.getOwnedHouses().stream()
+                .map(id -> House.builder().id(id).build())
+                .collect(Collectors.toSet());
+        return target.toBuilder().houses(houses).build();
+    }
 }

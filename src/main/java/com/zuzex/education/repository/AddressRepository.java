@@ -1,6 +1,6 @@
 package com.zuzex.education.repository;
 
-import com.zuzex.education.model.Address;
+import com.zuzex.education.model.db.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

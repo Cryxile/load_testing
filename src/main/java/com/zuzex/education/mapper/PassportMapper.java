@@ -1,20 +1,29 @@
 package com.zuzex.education.mapper;
 
-import com.zuzex.education.dto.PassportDTO;
-import com.zuzex.education.model.Passport;
+import com.zuzex.education.config.MapperConfiguration;
+import com.zuzex.education.dto.passport.PassportDTO;
+import com.zuzex.education.dto.passport.GetPassportListRs;
+import com.zuzex.education.dto.passport.UpdatePassportRq;
+import com.zuzex.education.dto.passport.UpdatePassportRs;
+import com.zuzex.education.model.db.Passport;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(config = MapperConfiguration.class)
 public interface PassportMapper {
-    @Mapping(source = "addressId", target = "residentAddress.id")
-    Passport mapPassportDtoToPassport(PassportDTO passportDTO);
+    @Mapping(target = "addressId", source = "residentAddress.id")
+    @Mapping(target = "ownerId", source = "owner.id")
+    PassportDTO map(Passport source);
 
-    @Mapping(source = "residentAddress.id", target = "addressId")
-    PassportDTO mapPassportToPassportDTO(Passport passport);
+    @Mapping(target = "residentAddress.id", source = "addressId")
+    Passport map(UpdatePassportRq source);
 
-    @Mapping(source = "residentAddress.id", target = "addressId")
-    List<PassportDTO> mapPassportToPassportDTO(List<Passport> passports);
+    @Mapping(target = "addressId", source = "residentAddress.id")
+    UpdatePassportRs mapRs(Passport source);
+
+    default GetPassportListRs map(List<Passport> source) {
+        return GetPassportListRs.builder().list(source.stream().map(this::map).toList()).build();
+    }
 }

@@ -1,12 +1,13 @@
-package com.zuzex.education.dto;
+package com.zuzex.education.dto.car;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.extern.jackson.Jacksonized;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.UUID;
 
@@ -15,10 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class CarDTO {
-    private UUID id;
-
-    private UUID personId;
+public class CreateCarRq {
+    @NotNull
+    private UUID ownerId;
 
     @NotBlank
     @Size(min = 3, max = 9)

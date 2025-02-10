@@ -1,12 +1,17 @@
 package com.zuzex.education.service;
 
-import com.zuzex.education.model.House;
+import com.zuzex.education.model.db.House;
+import com.zuzex.education.model.db.Person;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface HouseService {
     List<House> getAll();
+
+    List<Person> getAllByHouseStreet(String street);
+
+    House addOwnersToHouse(House house);
 
     House get(UUID id);
 
