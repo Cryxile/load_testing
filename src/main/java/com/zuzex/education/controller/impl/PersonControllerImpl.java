@@ -6,7 +6,7 @@ import com.zuzex.education.dto.person.AddToPersonRq;
 import com.zuzex.education.dto.person.AddToPersonRs;
 import com.zuzex.education.dto.person.CreateDetailedPersonRq;
 import com.zuzex.education.dto.person.CreateDetailedPersonRs;
-import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.dto.person.FindPeopleRs;
 import com.zuzex.education.interactor.DetailedPersonInteractor;
 import com.zuzex.education.mapper.DetailedPersonMapper;
 import com.zuzex.education.mapper.PersonMapper;
@@ -25,8 +25,8 @@ public class PersonControllerImpl implements PersonController {
     private final DetailedPersonMapper detailedPersonMapper;
 
     @Override
-    public GetPersonListRs getAll() {
-        return personMapper.map(personService.getAll());
+    public FindPeopleRs findAll() {
+        return personMapper.map(personService.findAll());
     }
 
     @Override

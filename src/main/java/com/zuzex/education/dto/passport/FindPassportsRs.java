@@ -1,4 +1,4 @@
-package com.zuzex.education.dto.address;
+package com.zuzex.education.dto.passport;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
-import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Jacksonized
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class GetAddressListRs {
-    private Collection<AddressDTO> list;
+public class FindPassportsRs {
+    private List<PassportDTO> passports;
 }

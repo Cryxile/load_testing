@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PassportService {
-    List<Passport> getAll();
+    List<Passport> findAll();
 
-    List<Passport> getAllByMaleLastNameFirstCharacter(Character initial);
+    List<Passport> findAllByMaleLastNameFirstCharacter(Character initial);
 
     Passport get(UUID id);
 

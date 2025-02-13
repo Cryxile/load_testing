@@ -1,10 +1,10 @@
 package com.zuzex.education.mapper;
 
 import com.zuzex.education.config.MapperConfiguration;
-import com.zuzex.education.dto.person.PersonDTO;
 import com.zuzex.education.dto.person.AddToPersonRq;
 import com.zuzex.education.dto.person.AddToPersonRs;
-import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.dto.person.FindPeopleRs;
+import com.zuzex.education.dto.person.PersonDTO;
 import com.zuzex.education.model.db.House;
 import com.zuzex.education.model.db.Person;
 import org.mapstruct.AfterMapping;
@@ -12,7 +12,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,8 +28,8 @@ public interface PersonMapper {
 
     AddToPersonRs mapRs(Person source);
 
-    default GetPersonListRs map(List<Person> source) {
-        return GetPersonListRs.builder().list(source.stream().map(this::map).toList()).build();
+    default FindPeopleRs map(Collection<Person> source) {
+        return FindPeopleRs.builder().people(source.stream().map(this::map).toList()).build();
     }
 
     @AfterMapping

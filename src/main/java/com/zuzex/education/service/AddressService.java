@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AddressService {
-    List<Address> getAll();
+    List<Address> findAll();
 
     Address get(UUID id);
 

@@ -4,12 +4,12 @@ import com.zuzex.education.config.MapperConfiguration;
 import com.zuzex.education.dto.car.CarDTO;
 import com.zuzex.education.dto.car.CreateCarRq;
 import com.zuzex.education.dto.car.CreateCarRs;
-import com.zuzex.education.dto.car.GetCarListRs;
+import com.zuzex.education.dto.car.FindCarsRs;
 import com.zuzex.education.model.db.Car;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
+import java.util.Collection;
 
 @Mapper(config = MapperConfiguration.class)
 public interface CarMapper {
@@ -25,7 +25,7 @@ public interface CarMapper {
     @Mapping(target = "ownerId", source = "owner.id")
     CreateCarRs mapRs(Car source);
 
-    default GetCarListRs map(List<Car> source) {
-        return GetCarListRs.builder().list(source.stream().map(this::map).toList()).build();
+    default FindCarsRs map(Collection<Car> source) {
+        return FindCarsRs.builder().cars(source.stream().map(this::map).toList()).build();
     }
 }

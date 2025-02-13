@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PersonService {
-    List<Person> getAll();
+    List<Person> findAll();
 
     Person get(UUID id);
 

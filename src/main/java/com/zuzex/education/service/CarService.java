@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CarService {
-    List<Car> getAll();
+    List<Car> findAll();
 
-    List<Car> getAllByOwner(UUID ownerId);
+    List<Car> findAllByOwner(UUID ownerId);
 
     Car get(UUID id);
 

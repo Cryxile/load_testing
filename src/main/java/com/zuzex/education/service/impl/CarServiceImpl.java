@@ -16,13 +16,13 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
 
     @Override
-    public List<Car> getAll() {
+    public List<Car> findAll() {
         return carRepository.findAll();
     }
 
     @Override
-    public List<Car> getAllByOwner(UUID ownerId) {
-        return carRepository.getAllByOwner(ownerId);
+    public List<Car> findAllByOwner(UUID ownerId) {
+        return carRepository.findAllByOwner(ownerId);
     }
 
     @Override
