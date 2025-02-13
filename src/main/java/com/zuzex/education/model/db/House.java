@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -43,6 +45,7 @@ public class House {
     private Address address;
 
     @ManyToMany
+    @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "people_houses",
             joinColumns = @JoinColumn(name = "house_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false))

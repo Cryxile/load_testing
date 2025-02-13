@@ -2,7 +2,7 @@ package com.zuzex.education.controller.impl;
 
 import com.zuzex.education.controller.AddressController;
 import com.zuzex.education.dto.address.AddressDTO;
-import com.zuzex.education.dto.address.GetAddressListRs;
+import com.zuzex.education.dto.address.FindAddressesRs;
 import com.zuzex.education.mapper.AddressMapper;
 import com.zuzex.education.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,8 @@ public class AddressControllerImpl implements AddressController {
     private final AddressMapper addressMapper;
 
     @Override
-    public GetAddressListRs getAll() {
-        return addressMapper.map(addressService.getAll());
+    public FindAddressesRs findAll() {
+        return addressMapper.map(addressService.findAll());
     }
 
     @Override

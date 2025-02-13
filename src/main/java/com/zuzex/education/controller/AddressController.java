@@ -1,7 +1,7 @@
 package com.zuzex.education.controller;
 
 import com.zuzex.education.dto.address.AddressDTO;
-import com.zuzex.education.dto.address.GetAddressListRs;
+import com.zuzex.education.dto.address.FindAddressesRs;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +16,7 @@ import static com.zuzex.education.constants.ResourceConstants.RESOURCE_VERSION_V
 
 public interface AddressController {
     @GetMapping(RESOURCE_VERSION_V1 + ADDRESSES_RESOURCE)
-    GetAddressListRs getAll();
+    FindAddressesRs findAll();
 
     @GetMapping(RESOURCE_VERSION_V1 + ADDRESSES_RESOURCE + "/{id}")
     AddressDTO get(@PathVariable @NotNull UUID id);

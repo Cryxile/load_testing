@@ -1,11 +1,13 @@
 package com.zuzex.education.repository;
 
 import com.zuzex.education.model.db.Car;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CarRepository extends JpaRepository<Car, UUID> {
@@ -13,5 +15,14 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     @Query(value = "DELETE FROM cars WHERE owner_id = :ownerId", nativeQuery = true)
     void deleteByOwner(UUID ownerId);
 
-    List<Car> getAllByOwner(UUID ownerId);
+    @EntityGraph(value = "Car.owner")
+    List<Car> findAllByOwner(UUID ownerId);
+
+    @Override
+    @EntityGraph(value = "Car.owner")
+    Optional<Car> findById(UUID uuid);
+
+    @Override
+    @EntityGraph(value = "Car.owner")
+    List<Car> findAll();
 }

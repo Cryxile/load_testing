@@ -6,8 +6,8 @@ import com.zuzex.education.dto.house.AddToHouseRq;
 import com.zuzex.education.dto.house.AddToHouseRs;
 import com.zuzex.education.dto.house.CreateHouseRq;
 import com.zuzex.education.dto.house.CreateHouseRs;
-import com.zuzex.education.dto.house.GetHouseListRs;
-import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.dto.house.FindHousesRs;
+import com.zuzex.education.dto.person.FindPeopleRs;
 import com.zuzex.education.dto.house.UpdateHouseRq;
 import com.zuzex.education.dto.house.UpdateHouseRs;
 import com.zuzex.education.interactor.DetailedHouseInteractor;
@@ -28,14 +28,14 @@ public class HouseControllerImpl implements HouseController {
     private final PersonMapper personMapper;
 
     @Override
-    public GetHouseListRs getAll() {
-        return houseMapper.map(houseService.getAll());
+    public FindHousesRs findAll() {
+        return houseMapper.map(houseService.findAll());
     }
 
     @Override
-    public GetPersonListRs getAllByHouseStreet(String street) {
+    public FindPeopleRs findOwnersByHouseStreet(String street) {
         return personMapper.map(
-                houseService.getAllByHouseStreet(street)
+                houseService.findOwnersByHouseStreet(street)
         );
     }
 

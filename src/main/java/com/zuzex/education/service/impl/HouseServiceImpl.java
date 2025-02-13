@@ -18,13 +18,13 @@ public class HouseServiceImpl implements HouseService {
     private final HouseRepository houseRepository;
 
     @Override
-    public List<House> getAll() {
+    public List<House> findAll() {
         return houseRepository.findAll();
     }
 
     @Override
-    public List<Person> getAllByHouseStreet(String street) {
-        return houseRepository.getAllByHouseStreet(street);
+    public List<Person> findOwnersByHouseStreet(String street) {
+        return houseRepository.findOwnersByHouseStreet(street);
     }
 
     @Override

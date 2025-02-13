@@ -17,17 +17,17 @@ public class PassportServiceImpl implements PassportService {
     private final PassportRepository passportRepository;
 
     @Override
-    public List<Passport> getAll() {
+    public List<Passport> findAll() {
         return passportRepository.findAll();
     }
 
     @Override
-    public List<Passport> getAllByMaleLastNameFirstCharacter(Character firstCharacter) {
-        List<Passport> passports = passportRepository.getAllMaleByLastNameFirstCharacter(firstCharacter);
+    public List<Passport> findAllByMaleLastNameFirstCharacter(Character firstCharacter) {
+        List<Passport> passports = passportRepository.findAllMaleByLastNameFirstCharacter(firstCharacter);
         if (passports.isEmpty()) {
             throw new MalePassportNotFoundException(firstCharacter);
         }
-        return passportRepository.getAllMaleByLastNameFirstCharacter(firstCharacter);
+        return passportRepository.findAllMaleByLastNameFirstCharacter(firstCharacter);
     }
 
     @Override

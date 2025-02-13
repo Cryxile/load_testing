@@ -1,16 +1,19 @@
 package com.zuzex.education.dto.house;
 
+import com.zuzex.education.dto.person.PersonDTO;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.extern.jackson.Jacksonized;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -35,4 +38,7 @@ public class HouseDTO {
 
     @NotNull
     private UUID addressId;
+
+    @NotEmpty
+    private List<PersonDTO> owners;
 }

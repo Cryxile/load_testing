@@ -2,7 +2,7 @@ package com.zuzex.education.controller.impl;
 
 import com.zuzex.education.controller.PassportController;
 import com.zuzex.education.dto.passport.PassportDTO;
-import com.zuzex.education.dto.passport.GetPassportListRs;
+import com.zuzex.education.dto.passport.FindPassportsRs;
 import com.zuzex.education.dto.passport.UpdatePassportRq;
 import com.zuzex.education.dto.passport.UpdatePassportRs;
 import com.zuzex.education.mapper.PassportMapper;
@@ -19,14 +19,14 @@ public class PassportControllerImpl implements PassportController {
     private final PassportMapper passportMapper;
 
     @Override
-    public GetPassportListRs getAll() {
-        return passportMapper.map(passportService.getAll());
+    public FindPassportsRs findAll() {
+        return passportMapper.map(passportService.findAll());
     }
 
     @Override
-    public GetPassportListRs getAllByMaleLastNameFirstCharacter(Character firstCharacter) {
+    public FindPassportsRs findAllByMaleLastNameFirstCharacter(Character firstCharacter) {
         return passportMapper.map(
-                passportService.getAllByMaleLastNameFirstCharacter(firstCharacter)
+                passportService.findAllByMaleLastNameFirstCharacter(firstCharacter)
         );
     }
 

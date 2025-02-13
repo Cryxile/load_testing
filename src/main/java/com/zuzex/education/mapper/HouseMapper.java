@@ -1,12 +1,12 @@
 package com.zuzex.education.mapper;
 
 import com.zuzex.education.config.MapperConfiguration;
-import com.zuzex.education.dto.house.HouseDTO;
 import com.zuzex.education.dto.house.AddToHouseRq;
 import com.zuzex.education.dto.house.AddToHouseRs;
 import com.zuzex.education.dto.house.CreateHouseRq;
 import com.zuzex.education.dto.house.CreateHouseRs;
-import com.zuzex.education.dto.house.GetHouseListRs;
+import com.zuzex.education.dto.house.FindHousesRs;
+import com.zuzex.education.dto.house.HouseDTO;
 import com.zuzex.education.dto.house.UpdateHouseRq;
 import com.zuzex.education.dto.house.UpdateHouseRs;
 import com.zuzex.education.model.db.House;
@@ -16,7 +16,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,8 +48,8 @@ public interface HouseMapper {
 
     AddToHouseRs mapSettlementRs(House source);
 
-    default GetHouseListRs map(List<House> source) {
-        return GetHouseListRs.builder().list(source.stream().map(this::map).toList()).build();
+    default FindHousesRs map(Collection<House> source) {
+        return FindHousesRs.builder().houses(source.stream().map(this::map).toList()).build();
     }
 
     @AfterMapping

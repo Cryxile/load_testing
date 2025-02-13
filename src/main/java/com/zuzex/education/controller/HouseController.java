@@ -5,8 +5,8 @@ import com.zuzex.education.dto.house.AddToHouseRq;
 import com.zuzex.education.dto.house.AddToHouseRs;
 import com.zuzex.education.dto.house.CreateHouseRq;
 import com.zuzex.education.dto.house.CreateHouseRs;
-import com.zuzex.education.dto.house.GetHouseListRs;
-import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.dto.house.FindHousesRs;
+import com.zuzex.education.dto.person.FindPeopleRs;
 import com.zuzex.education.dto.house.UpdateHouseRq;
 import com.zuzex.education.dto.house.UpdateHouseRs;
 import jakarta.validation.Valid;
@@ -28,10 +28,10 @@ import static com.zuzex.education.constants.ResourceConstants.RESOURCE_VERSION_V
 
 public interface HouseController {
     @GetMapping(RESOURCE_VERSION_V1 + HOUSES_RESOURCE)
-    GetHouseListRs getAll();
+    FindHousesRs findAll();
 
     @GetMapping(RESOURCE_VERSION_V1 + HOUSES_RESOURCE + "/owners/{street}")
-    GetPersonListRs getAllByHouseStreet(@PathVariable @NotBlank String street);
+    FindPeopleRs findOwnersByHouseStreet(@PathVariable @NotBlank String street);
 
     @GetMapping(RESOURCE_VERSION_V1 + HOUSES_RESOURCE + "/{id}")
     HouseDTO get(@PathVariable @NotNull UUID id);

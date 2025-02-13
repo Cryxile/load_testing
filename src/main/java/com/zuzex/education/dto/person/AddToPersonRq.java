@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -20,5 +20,5 @@ public class AddToPersonRq {
     private UUID personId;
 
     @NotNull
-    private Collection<UUID> ownedHouses;
+    private Set<UUID> ownedHouses;
 }

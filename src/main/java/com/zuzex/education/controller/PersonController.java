@@ -5,7 +5,7 @@ import com.zuzex.education.dto.person.AddToPersonRq;
 import com.zuzex.education.dto.person.AddToPersonRs;
 import com.zuzex.education.dto.person.CreateDetailedPersonRq;
 import com.zuzex.education.dto.person.CreateDetailedPersonRs;
-import com.zuzex.education.dto.person.GetPersonListRs;
+import com.zuzex.education.dto.person.FindPeopleRs;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ import static com.zuzex.education.constants.ResourceConstants.RESOURCE_VERSION_V
 
 public interface PersonController {
     @GetMapping(RESOURCE_VERSION_V1 + PEOPLE_RESOURCE)
-    GetPersonListRs getAll();
+    FindPeopleRs findAll();
 
     @GetMapping(RESOURCE_VERSION_V1 + PEOPLE_RESOURCE + "/{id}")
     PersonDTO get(@PathVariable @NotNull UUID id);

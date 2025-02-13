@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,8 +23,12 @@ import java.util.UUID;
 @Setter
 @Builder(toBuilder = true)
 @NamedQuery(
-        name = "Car.getAllByOwner",
+        name = "Car.findAllByOwner",
         query = "FROM Car c WHERE c.owner.id = :ownerId"
+)
+@NamedEntityGraph(
+        name = "Car.owner",
+        attributeNodes = @NamedAttributeNode("owner")
 )
 @Entity
 @Table(name = "cars")

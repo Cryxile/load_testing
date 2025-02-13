@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface HouseService {
-    List<House> getAll();
+    List<House> findAll();
 
-    List<Person> getAllByHouseStreet(String street);
+    List<Person> findOwnersByHouseStreet(String street);
 
     House addOwnersToHouse(House house);
 

@@ -3,7 +3,7 @@ package com.zuzex.education.controller;
 import com.zuzex.education.dto.car.CarDTO;
 import com.zuzex.education.dto.car.CreateCarRq;
 import com.zuzex.education.dto.car.CreateCarRs;
-import com.zuzex.education.dto.car.GetCarListRs;
+import com.zuzex.education.dto.car.FindCarsRs;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
@@ -22,10 +22,10 @@ import static com.zuzex.education.constants.ResourceConstants.RESOURCE_VERSION_V
 
 public interface CarController {
     @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE)
-    GetCarListRs getAll();
+    FindCarsRs findAll();
 
     @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE + "/owner/{id}")
-    GetCarListRs getAllByOwner(@PathVariable @NotNull UUID id);
+    FindCarsRs findAllByOwner(@PathVariable @NotNull UUID id);
 
     @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE + "/{id}")
     CarDTO get(@PathVariable UUID id);

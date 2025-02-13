@@ -1,4 +1,4 @@
-package com.zuzex.education.dto.car;
+package com.zuzex.education.dto.house;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
-import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Jacksonized
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class GetCarListRs {
-    private Collection<CarDTO> list;
+public class FindHousesRs {
+    private List<HouseDTO> houses;
 }

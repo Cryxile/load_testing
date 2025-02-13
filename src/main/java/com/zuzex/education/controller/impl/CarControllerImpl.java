@@ -4,7 +4,7 @@ import com.zuzex.education.controller.CarController;
 import com.zuzex.education.dto.car.CarDTO;
 import com.zuzex.education.dto.car.CreateCarRq;
 import com.zuzex.education.dto.car.CreateCarRs;
-import com.zuzex.education.dto.car.GetCarListRs;
+import com.zuzex.education.dto.car.FindCarsRs;
 import com.zuzex.education.mapper.CarMapper;
 import com.zuzex.education.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +19,13 @@ public class CarControllerImpl implements CarController {
     private final CarMapper carMapper;
 
     @Override
-    public GetCarListRs getAll() {
-        return carMapper.map(carService.getAll());
+    public FindCarsRs findAll() {
+        return carMapper.map(carService.findAll());
     }
 
     @Override
-    public GetCarListRs getAllByOwner(UUID id) {
-        return carMapper.map(carService.getAllByOwner(id));
+    public FindCarsRs findAllByOwner(UUID id) {
+        return carMapper.map(carService.findAllByOwner(id));
     }
 
     @Override

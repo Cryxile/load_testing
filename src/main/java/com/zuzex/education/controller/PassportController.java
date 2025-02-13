@@ -1,7 +1,7 @@
 package com.zuzex.education.controller;
 
 import com.zuzex.education.dto.passport.PassportDTO;
-import com.zuzex.education.dto.passport.GetPassportListRs;
+import com.zuzex.education.dto.passport.FindPassportsRs;
 import com.zuzex.education.dto.passport.UpdatePassportRq;
 import com.zuzex.education.dto.passport.UpdatePassportRs;
 import com.zuzex.education.validator.Char;
@@ -19,10 +19,10 @@ import static com.zuzex.education.constants.ResourceConstants.RESOURCE_VERSION_V
 
 public interface PassportController {
     @GetMapping(RESOURCE_VERSION_V1 + PASSPORTS_RESOURCE)
-    GetPassportListRs getAll();
+    FindPassportsRs findAll();
 
     @GetMapping(RESOURCE_VERSION_V1 + PASSPORTS_RESOURCE + "/male/last-name/initial/{firstCharacter}")
-    GetPassportListRs getAllByMaleLastNameFirstCharacter(@Valid @PathVariable @Char(regexp = "[a-zA-Zа-яА-Я]") Character firstCharacter);
+    FindPassportsRs findAllByMaleLastNameFirstCharacter(@Valid @PathVariable @Char(regexp = "[a-zA-Zа-яА-Я]") Character firstCharacter);
 
     @GetMapping(RESOURCE_VERSION_V1 + PASSPORTS_RESOURCE + "/{id}")
     PassportDTO get(@PathVariable @NotNull UUID id);

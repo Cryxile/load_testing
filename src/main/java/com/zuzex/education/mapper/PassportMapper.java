@@ -1,15 +1,15 @@
 package com.zuzex.education.mapper;
 
 import com.zuzex.education.config.MapperConfiguration;
+import com.zuzex.education.dto.passport.FindPassportsRs;
 import com.zuzex.education.dto.passport.PassportDTO;
-import com.zuzex.education.dto.passport.GetPassportListRs;
 import com.zuzex.education.dto.passport.UpdatePassportRq;
 import com.zuzex.education.dto.passport.UpdatePassportRs;
 import com.zuzex.education.model.db.Passport;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
+import java.util.Collection;
 
 @Mapper(config = MapperConfiguration.class)
 public interface PassportMapper {
@@ -23,7 +23,7 @@ public interface PassportMapper {
     @Mapping(target = "addressId", source = "residentAddress.id")
     UpdatePassportRs mapRs(Passport source);
 
-    default GetPassportListRs map(List<Passport> source) {
-        return GetPassportListRs.builder().list(source.stream().map(this::map).toList()).build();
+    default FindPassportsRs map(Collection<Passport> source) {
+        return FindPassportsRs.builder().passports(source.stream().map(this::map).toList()).build();
     }
 }
