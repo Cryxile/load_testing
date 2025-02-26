@@ -1,6 +1,7 @@
 package com.zuzex.education.service.impl;
 
 import com.zuzex.education.exception.HouseNotFoundException;
+import com.zuzex.education.model.HouseOwners;
 import com.zuzex.education.model.db.House;
 import com.zuzex.education.model.db.Person;
 import com.zuzex.education.repository.HouseRepository;
@@ -33,14 +34,10 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public House addOwnersToHouse(House house) {
-        UUID houseId = house.getId();
-        return houseRepository.save(
-                houseRepository.findById(houseId).orElseThrow(() -> new HouseNotFoundException(houseId))
-                        .toBuilder()
-                        .owners(house.getOwners())
-                        .build()
-        );
+    public HouseOwners addOwnersToHouse(HouseOwners owners) {
+        UUID houseId = owners.getHouseId();
+        owners.getHouseOwners().forEach(owner -> houseRepository.saveOwners(houseId, owner));
+        return HouseOwners.builder().houseId(houseId).houseOwners(houseRepository.findHouseOwners(houseId)).build();
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.zuzex.education.dto.person.FindPeopleRs;
 import com.zuzex.education.dto.house.UpdateHouseRq;
 import com.zuzex.education.dto.house.UpdateHouseRs;
 import com.zuzex.education.interactor.DetailedHouseInteractor;
+import com.zuzex.education.mapper.DetailedHouseMapper;
 import com.zuzex.education.mapper.HouseMapper;
 import com.zuzex.education.mapper.PersonMapper;
 import com.zuzex.education.service.HouseService;
@@ -24,6 +25,7 @@ import java.util.UUID;
 public class HouseControllerImpl implements HouseController {
     private final HouseService houseService;
     private final DetailedHouseInteractor detailedHouseInteractor;
+    private final DetailedHouseMapper detailedHouseMapper;
     private final HouseMapper houseMapper;
     private final PersonMapper personMapper;
 
@@ -57,9 +59,9 @@ public class HouseControllerImpl implements HouseController {
 
     @Override
     public CreateHouseRs create(CreateHouseRq house) {
-        return houseMapper.mapCrRs(
+        return detailedHouseMapper.map(
                 detailedHouseInteractor.createHouse(
-                        houseMapper.map(house)
+                        detailedHouseMapper.map(house)
                 )
         );
     }

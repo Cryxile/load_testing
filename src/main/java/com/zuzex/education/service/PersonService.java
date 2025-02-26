@@ -10,8 +10,6 @@ public interface PersonService {
 
     Person get(UUID id);
 
-    Person addHouseToPerson(Person person);
-
     Person create(Person person);
 
     Person update(Person person);

@@ -26,17 +26,6 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person addHouseToPerson(Person person) {
-        UUID personId = person.getId();
-        return personRepository.save(
-                personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId))
-                        .toBuilder()
-                        .houses(person.getHouses())
-                        .build()
-        );
-    }
-
-    @Override
     public Person create(Person person) {
         return personRepository.save(
                 Person.builder()

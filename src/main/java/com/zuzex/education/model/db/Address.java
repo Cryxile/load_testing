@@ -23,12 +23,12 @@ public class Address {
     @Id
     private UUID id;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "city", length = 100, nullable = false)
     private String city;
 
-    @Column(length = 150, nullable = false)
+    @Column(name = "street",length = 150, nullable = false)
     private String street;
 
-    @Column(length = 6, nullable = false)
+    @Column(name = "house_number",length = 6, nullable = false)
     private String houseNumber;
 }

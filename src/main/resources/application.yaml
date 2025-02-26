@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: jooq
   application:
     name: city-management
   datasource:

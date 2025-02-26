@@ -3,19 +3,13 @@ package com.zuzex.education.model.db;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -29,19 +23,12 @@ public class Person {
     @Id
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name =  "height", nullable = false)
     private Integer height;
 
-    @Column(nullable = false)
+    @Column(name =  "weight", nullable = false)
     private Integer weight;
 
-    @Column(length = 15, nullable = false)
+    @Column(name =  "hair_color",length = 15, nullable = false)
     private String hairColor;
-
-    @ManyToMany
-    @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "people_houses",
-            joinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "house_id", referencedColumnName = "id", nullable = false))
-    private Set<House> houses;
 }

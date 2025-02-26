@@ -7,25 +7,23 @@ import com.zuzex.education.dto.car.CreateCarRs;
 import com.zuzex.education.dto.car.FindCarsRs;
 import com.zuzex.education.model.db.Car;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.Collection;
+import java.util.List;
 
 @Mapper(config = MapperConfiguration.class)
 public interface CarMapper {
-    @Mapping(target = "ownerId", source = "owner.id")
     CarDTO map(Car source);
 
-    @Mapping(target = "owner.id", source = "ownerId")
     Car map(CarDTO source);
 
-    @Mapping(target = "owner.id", source = "ownerId")
     Car map(CreateCarRq source);
 
-    @Mapping(target = "ownerId", source = "owner.id")
     CreateCarRs mapRs(Car source);
 
+    List<CarDTO> mapToList(Collection<Car> source);
+
     default FindCarsRs map(Collection<Car> source) {
-        return FindCarsRs.builder().cars(source.stream().map(this::map).toList()).build();
+        return new FindCarsRs(mapToList(source));
     }
 }

@@ -1,11 +1,9 @@
 package com.zuzex.education.controller;
 
-import com.zuzex.education.dto.person.PersonDTO;
-import com.zuzex.education.dto.person.AddToPersonRq;
-import com.zuzex.education.dto.person.AddToPersonRs;
 import com.zuzex.education.dto.person.CreateDetailedPersonRq;
 import com.zuzex.education.dto.person.CreateDetailedPersonRs;
 import com.zuzex.education.dto.person.FindPeopleRs;
+import com.zuzex.education.dto.person.PersonDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
@@ -28,9 +26,6 @@ public interface PersonController {
 
     @GetMapping(RESOURCE_VERSION_V1 + PEOPLE_RESOURCE + "/{id}")
     PersonDTO get(@PathVariable @NotNull UUID id);
-
-    @PutMapping(RESOURCE_VERSION_V1 + PEOPLE_RESOURCE + "/house")
-    AddToPersonRs addHouseToPerson(@Valid @RequestBody AddToPersonRq person);
 
     @PostMapping(RESOURCE_VERSION_V1 + PEOPLE_RESOURCE)
     @ResponseStatus(HttpStatus.CREATED)

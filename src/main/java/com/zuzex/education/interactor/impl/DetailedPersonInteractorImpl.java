@@ -1,12 +1,11 @@
 package com.zuzex.education.interactor.impl;
 
+import com.zuzex.education.interactor.DetailedPersonInteractor;
 import com.zuzex.education.mapper.DetailedPersonMapper;
 import com.zuzex.education.model.DetailedPerson;
-import com.zuzex.education.model.db.Address;
 import com.zuzex.education.model.db.Passport;
 import com.zuzex.education.model.db.Person;
 import com.zuzex.education.service.CarService;
-import com.zuzex.education.interactor.DetailedPersonInteractor;
 import com.zuzex.education.service.PassportService;
 import com.zuzex.education.service.PersonService;
 import jakarta.transaction.Transactional;
@@ -39,8 +38,8 @@ public class DetailedPersonInteractorImpl implements DetailedPersonInteractor {
                         .lastName(detailedPerson.getLastName())
                         .birthDate(detailedPerson.getBirthDate())
                         .gender(detailedPerson.getGender())
-                        .owner(newPerson)
-                        .residentAddress(Address.builder().id(detailedPerson.getAddressId()).build())
+                        .ownerId(newPerson.getId())
+                        .residentAddressId(detailedPerson.getAddressId())
                         .build()
         );
         return detailedPersonMapper.map(newPerson, newPassport);

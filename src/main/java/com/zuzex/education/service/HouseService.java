@@ -1,5 +1,6 @@
 package com.zuzex.education.service;
 
+import com.zuzex.education.model.HouseOwners;
 import com.zuzex.education.model.db.House;
 import com.zuzex.education.model.db.Person;
 
@@ -11,7 +12,7 @@ public interface HouseService {
 
     List<Person> findOwnersByHouseStreet(String street);
 
-    House addOwnersToHouse(House house);
+    HouseOwners addOwnersToHouse(HouseOwners owners);
 
     House get(UUID id);
 
