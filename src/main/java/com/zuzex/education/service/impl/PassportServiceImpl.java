@@ -44,8 +44,8 @@ public class PassportServiceImpl implements PassportService {
                         .lastName(passport.getLastName())
                         .birthDate(passport.getBirthDate())
                         .gender(passport.getGender())
-                        .owner(passport.getOwner())
-                        .residentAddress(passport.getResidentAddress())
+                        .ownerId(passport.getOwnerId())
+                        .residentAddressId(passport.getResidentAddressId())
                         .build()
         );
     }

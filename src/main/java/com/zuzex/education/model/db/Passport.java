@@ -3,9 +3,6 @@ package com.zuzex.education.model.db;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,23 +24,21 @@ public class Passport {
     @Id
     private UUID id;
 
-    @Column(length = 15, nullable = false)
+    @Column(name =  "first_name",length = 15, nullable = false)
     private String firstName;
 
-    @Column(length = 15, nullable = false)
+    @Column(name =  "last_name",length = 15, nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(name =  "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @Column(length = 6, nullable = false)
+    @Column(name =  "gender", length = 6, nullable = false)
     private String gender;
 
-    @OneToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false, updatable = false)
-    private Person owner;
+    @Column(name = "owner_id", nullable = false)
+    private UUID ownerId;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address residentAddress;
+    @Column(name = "address_id", nullable = false)
+    private UUID residentAddressId;
 }

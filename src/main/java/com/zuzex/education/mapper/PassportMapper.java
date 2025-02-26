@@ -10,20 +10,22 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.Collection;
+import java.util.List;
 
 @Mapper(config = MapperConfiguration.class)
 public interface PassportMapper {
-    @Mapping(target = "addressId", source = "residentAddress.id")
-    @Mapping(target = "ownerId", source = "owner.id")
+    @Mapping(target = "addressId", source = "residentAddressId")
     PassportDTO map(Passport source);
 
-    @Mapping(target = "residentAddress.id", source = "addressId")
+    @Mapping(target = "residentAddressId", source = "addressId")
     Passport map(UpdatePassportRq source);
 
-    @Mapping(target = "addressId", source = "residentAddress.id")
+    @Mapping(target = "addressId", source = "residentAddressId")
     UpdatePassportRs mapRs(Passport source);
 
+    List<PassportDTO> mapToList(Collection<Passport> source);
+
     default FindPassportsRs map(Collection<Passport> source) {
-        return FindPassportsRs.builder().passports(source.stream().map(this::map).toList()).build();
+        return new FindPassportsRs(mapToList(source));
     }
 }

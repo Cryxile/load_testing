@@ -38,7 +38,7 @@ public class CarServiceImpl implements CarService {
                         .brand(car.getBrand())
                         .model(car.getModel())
                         .color(car.getColor())
-                        .owner(car.getOwner())
+                        .ownerId(car.getOwnerId())
                         .build()
         );
     }

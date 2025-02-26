@@ -1,28 +1,16 @@
 package com.zuzex.education.repository;
 
 import com.zuzex.education.model.db.Car;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface CarRepository extends JpaRepository<Car, UUID> {
-    @Modifying
-    @Query(value = "DELETE FROM cars WHERE owner_id = :ownerId", nativeQuery = true)
-    void deleteByOwner(UUID ownerId);
-
-    @EntityGraph(value = "Car.owner")
-    List<Car> findAllByOwner(UUID ownerId);
-
-    @Override
-    @EntityGraph(value = "Car.owner")
-    Optional<Car> findById(UUID uuid);
-
-    @Override
-    @EntityGraph(value = "Car.owner")
+public interface CarRepository {
     List<Car> findAll();
+    List<Car> findAllByOwner(UUID ownerId);
+    Optional<Car> findById(UUID id);
+    Car save(Car car);
+    void deleteById(UUID id);
+    void deleteByOwner(UUID id);
 }

@@ -3,10 +3,6 @@ package com.zuzex.education.model.db;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedAttributeNode;
-import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,11 +20,7 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @NamedQuery(
         name = "Car.findAllByOwner",
-        query = "FROM Car c WHERE c.owner.id = :ownerId"
-)
-@NamedEntityGraph(
-        name = "Car.owner",
-        attributeNodes = @NamedAttributeNode("owner")
+        query = "FROM Car c WHERE c.ownerId = :ownerId"
 )
 @Entity
 @Table(name = "cars")
@@ -36,16 +28,15 @@ public class Car {
     @Id
     private UUID id;
 
-    @Column(length = 9, nullable = false)
+    @Column(name = "brand", length = 9, nullable = false)
     private String brand;
 
-    @Column(length = 9, nullable = false)
+    @Column(name = "model", length = 9, nullable = false)
     private String model;
 
-    @Column(length = 15, nullable = false)
+    @Column(name = "color", length = 15, nullable = false)
     private String color;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
-    private Person owner;
+    @Column(name = "owner_id", nullable = false)
+    private UUID ownerId;
 }

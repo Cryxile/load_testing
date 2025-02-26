@@ -24,8 +24,8 @@ public class CarControllerImpl implements CarController {
     }
 
     @Override
-    public FindCarsRs findAllByOwner(UUID id) {
-        return carMapper.map(carService.findAllByOwner(id));
+    public FindCarsRs findAllByOwner(UUID ownerId) {
+        return carMapper.map(carService.findAllByOwner(ownerId));
     }
 
     @Override

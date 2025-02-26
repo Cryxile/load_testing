@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 public interface DetailedPersonMapper {
     @Mapping(target = "passportId", source = "passportSource.id")
     @Mapping(target = "id", source = "personSource.id")
-    @Mapping(target = "addressId", source = "passportSource.residentAddress.id")
+    @Mapping(target = "addressId", source = "passportSource.residentAddressId")
     DetailedPerson map(Person personSource, Passport passportSource);
 
     DetailedPerson map(CreateDetailedPersonRq source);
