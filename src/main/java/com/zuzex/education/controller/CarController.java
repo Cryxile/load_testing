@@ -24,7 +24,7 @@ public interface CarController {
     @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE)
     FindCarsRs findAll();
 
-    @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE + "/owner/{id}")
+    @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE + "/owner/{ownerId}")
     FindCarsRs findAllByOwner(@PathVariable @NotNull UUID ownerId);
 
     @GetMapping(RESOURCE_VERSION_V1 + CARS_RESOURCE + "/{id}")

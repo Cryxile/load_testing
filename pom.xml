@@ -24,6 +24,8 @@
 		<mapstruct-processor.version>1.6.3</mapstruct-processor.version>
 		<liquibase.version>4.31.0</liquibase.version>
 		<jooq.version>3.19.18</jooq.version>
+		<zonky-embedded-postgres.version>2.1.0</zonky-embedded-postgres.version>
+		<zonky.version>2.6.0</zonky.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -80,6 +82,19 @@
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq-codegen</artifactId>
 			<version>${jooq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.zonky.test</groupId>
+			<artifactId>embedded-postgres</artifactId>
+			<version>${zonky-embedded-postgres.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.zonky.test</groupId>
+			<artifactId>embedded-database-spring-test</artifactId>
+			<version>${zonky.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>

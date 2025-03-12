@@ -8,13 +8,23 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Profile("hibernate")
 public interface CarHibernateRepository extends JpaRepository<Car, UUID>, CarRepository {
+    List<Car> findAllByOwner(UUID ownerId);
+
+    @Override
+    Optional<Car> findById(UUID uuid);
+
+    @Override
+    Car save(Car car);
+
+    @Override
+    void deleteById(UUID uuid);
+
     @Modifying
     @Query(value = "DELETE FROM cars WHERE owner_id = :ownerId", nativeQuery = true)
     void deleteByOwner(UUID ownerId);
-
-    List<Car> findAllByOwner(UUID ownerId);
 }

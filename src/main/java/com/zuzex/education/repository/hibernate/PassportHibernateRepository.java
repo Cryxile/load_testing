@@ -15,8 +15,6 @@ public interface PassportHibernateRepository extends JpaRepository<Passport, UUI
     @Query(value = """
                 SELECT pass
                 FROM Passport pass
-                JOIN FETCH pass.residentAddress
-                JOIN FETCH pass.owner
                 WHERE pass.gender = 'Male' AND pass.lastName ILIKE :firstCharacter%
             """)
     List<Passport> findAllMaleByLastNameFirstCharacter(Character firstCharacter);

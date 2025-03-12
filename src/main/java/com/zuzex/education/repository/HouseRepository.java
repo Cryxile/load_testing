@@ -11,10 +11,10 @@ import java.util.UUID;
 public interface HouseRepository {
     List<House> findAll();
     List<Person> findOwnersByHouseStreet(String street);
+    Set<UUID> findHouseOwners(UUID houseId);
     Optional<House> findById(UUID id);
     House save(House house);
     void saveOwners(UUID houseId, UUID ownerId);
-    Set<UUID> findHouseOwners(UUID houseId);
     void deleteFromPeopleHouses(UUID id);
     void deleteById(UUID id);
 }

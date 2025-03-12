@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS cars
     (
         id UUID PRIMARY KEY,
-        brand VARCHAR(9) NOT NULL UNIQUE,
+        brand VARCHAR(9) NOT NULL,
         model VARCHAR(9) NOT NULL,
         color VARCHAR(15) NOT NULL,
         owner_id UUID REFERENCES people (id)

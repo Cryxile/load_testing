@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/master.yml
+  - include:
+      file: changeset/insert-cars.sql
+      relativeToChangelogFile: true

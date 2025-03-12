@@ -41,6 +41,14 @@ public class HouseJooqRepository implements HouseRepository {
     }
 
     @Override
+    public Set<UUID> findHouseOwners(UUID houseId) {
+        return dslContext.select(PeopleHouses.PEOPLE_HOUSES.OWNER_ID)
+                .from(PeopleHouses.PEOPLE_HOUSES)
+                .where(PeopleHouses.PEOPLE_HOUSES.HOUSE_ID.eq(houseId))
+                .fetchSet(PeopleHouses.PEOPLE_HOUSES.OWNER_ID);
+    }
+
+    @Override
     public Optional<House> findById(UUID id) {
         return dslContext.selectFrom(Houses.HOUSES)
                 .where(Houses.HOUSES.ID.eq(id))
@@ -66,14 +74,6 @@ public class HouseJooqRepository implements HouseRepository {
                 .onConflict(PeopleHouses.PEOPLE_HOUSES.OWNER_ID, PeopleHouses.PEOPLE_HOUSES.HOUSE_ID)
                 .doNothing()
                 .execute();
-    }
-
-    @Override
-    public Set<UUID> findHouseOwners(UUID houseId) {
-        return dslContext.select(PeopleHouses.PEOPLE_HOUSES.OWNER_ID)
-                .from(PeopleHouses.PEOPLE_HOUSES)
-                .where(PeopleHouses.PEOPLE_HOUSES.HOUSE_ID.eq(houseId))
-                .fetchSet(PeopleHouses.PEOPLE_HOUSES.OWNER_ID);
     }
 
     @Override
