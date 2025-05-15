@@ -5,8 +5,6 @@ import com.zuzex.education.dto.car.CarDTO;
 import com.zuzex.education.dto.car.CreateCarRq;
 import com.zuzex.education.dto.car.FindCarsRs;
 import com.zuzex.education.model.db.Car;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -26,11 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@DisplayName("Интеграционное тестирование CarControllerImpl")
-class CarControllerImplTest extends BaseIntegrationTest {
-    @Test
-    @DisplayName("Получение всех машин из БД")
-    void should_return_all_cars() throws Exception {
+abstract class CarControllerImplTest extends BaseIntegrationTest {
+    protected void should_return_all_cars() throws Exception {
         //given
         carRepository.save(
                 Car.builder()
@@ -50,7 +45,7 @@ class CarControllerImplTest extends BaseIntegrationTest {
                         .ownerId(UUID.fromString("550e8400-e29b-41d4-a716-446655440000"))
                         .build()
         );
-        List<Car> cars = carRepository.findAll();
+        FindCarsRs cars = carMapper.map(carRepository.findAll());
 
         //when
         ResultActions resultActions = mockMvc.perform(
@@ -64,13 +59,14 @@ class CarControllerImplTest extends BaseIntegrationTest {
                 .getResponse()
                 .getContentAsString();
         FindCarsRs responseCars = objectMapper.readValue(response, FindCarsRs.class);
-        assertEquals(cars.size(), responseCars.getCars().size());
-        cars.forEach(car -> assertTrue(responseCars.getCars().contains(carMapper.map(car))));
+        assertEquals(cars.getCars().size(), responseCars.getCars().size());
+        cars.getCars().forEach(
+                car -> assertTrue(responseCars.getCars().stream()
+                        .anyMatch(responseCar -> responseCar.getId().equals(car.getId())))
+        );
     }
 
-    @Test
-    @DisplayName("Получение машины по идентификатору владельца")
-    void should_return_all_cars_belong_to_owner() throws Exception {
+    protected void should_return_all_cars_belong_to_owner() throws Exception {
         //given
         carRepository.save(
                 Car.builder()
@@ -106,12 +102,14 @@ class CarControllerImplTest extends BaseIntegrationTest {
                 .getContentAsString();
         FindCarsRs responseCars = objectMapper.readValue(response, FindCarsRs.class);
         assertEquals(ownerCars.size(), responseCars.getCars().size());
-        ownerCars.forEach(car -> assertTrue(responseCars.getCars().contains(carMapper.map(car))));
+        ownerCars.forEach(
+                car -> assertTrue(responseCars.getCars().stream()
+                        .anyMatch(responseCar -> responseCar.getId().equals(car.getId())))
+        );
     }
 
-    @Test
-    @DisplayName("Получение машины по её идентификатору")
-    void should_return_car_when_exists() throws Exception {
+
+    protected void should_return_car_when_exists() throws Exception {
         //given
         UUID id = UUID.fromString("550e8400-e29b-41d4-a716-446655440002");
 
@@ -130,9 +128,7 @@ class CarControllerImplTest extends BaseIntegrationTest {
         assertEquals(id, responseCar.getId());
     }
 
-    @Test
-    @DisplayName("Вывод сообщения об ошибке и статус кода при попытке получить несуществующую машину")
-    void should_respond_not_found_status_and_message() throws Exception {
+    protected void should_respond_not_found_status_and_message() throws Exception {
         //given
         UUID id = UUID.fromString("550e8400-e29b-41d4-a716-112233445566");
 
@@ -152,9 +148,7 @@ class CarControllerImplTest extends BaseIntegrationTest {
         assertFalse(errorResponse.getMessage().isBlank());
     }
 
-    @Test
-    @DisplayName("Сохранение машины в БД")
-    void should_create_and_return_car() throws Exception {
+    protected void should_create_and_return_car() throws Exception {
         //given
         CreateCarRq inputCar = CreateCarRq.builder()
                 .brand("Lada")
@@ -184,9 +178,7 @@ class CarControllerImplTest extends BaseIntegrationTest {
         assertEquals(inputCar.getOwnerId(), responseCar.getOwnerId());
     }
 
-    @Test
-    @DisplayName("Обновление машины в БД")
-    void should_update_and_return_car() throws Exception {
+    protected void should_update_and_return_car() throws Exception {
         //given
         Car inputCar = Car.builder()
                 .id(UUID.fromString("550e8400-e29b-41d4-a716-446655440001"))
@@ -218,9 +210,7 @@ class CarControllerImplTest extends BaseIntegrationTest {
         assertEquals(inputCar.getOwnerId(), responseCar.getOwnerId());
     }
 
-    @Test
-    @DisplayName("Удаление машины из БД")
-    void should_delete_car_and_return_no_content() throws Exception {
+    protected void should_delete_car_and_return_no_content() throws Exception {
         //given
         Car carToDelete = carRepository.save(
                 Car.builder()

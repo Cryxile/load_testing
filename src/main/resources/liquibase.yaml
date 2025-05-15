@@ -2,4 +2,4 @@ url: jdbc:postgresql://localhost:5432/postgres
 username: postgres
 password: postgres
 driver: org.postgresql.Driver
-changeLogFile: db/changelog/master.yml
+changeLogFile: src/main/resources/db/changelog/master.yml

@@ -1,0 +1,35 @@
+@startuml
+actor User
+participant "Store Service" as Store
+database "Store DB" as SDB
+participant "Bank Service" as Bank
+database "Bank DB" as BDB
+participant "Police Service" as Police
+database "Police DB" as PDB
+participant "Car School Service" as School
+database "Car School DB" as CSDB
+
+
+User -> Store: Создание заявки на предзаказ
+Store -> SDB: Запрос наличия машины
+SDB --> Store: Данные о наличии машины
+alt Машины нет в наличии
+    Store -> User: Ошибка - Машины нет в наличии
+else Машина в наличии
+    Store --> User: 200-OK-Заявка в работе
+    Store ->> Police: Запрос данных о ВУ
+    Store ->> Bank: Запрос баланса пользователя
+    Bank ->> BDB: Запрос баланса пользователя
+    BDB --> Bank: Данные о балансе пользователя
+    Bank --> Store: Данные о балансе пользователя
+    Police ->> PDB: Запрос данных о ВУ
+    PDB --> Police: Данные о ВУ
+    Police ->> School: Запрос оригинальности ВУ
+    School ->> CSDB: Запрос оригинальности ВУ
+    CSDB --> School: Данные об оригинальности ВУ
+    School --> Police: Данные об оригинальности ВУ
+    Police --> Store: Данные о ВУ
+    User -> Store: Запрос состояния заявки
+    Store --> User: Данные о состоянии заявки
+end
+@enduml

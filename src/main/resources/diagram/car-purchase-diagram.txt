@@ -1,0 +1,41 @@
+@startuml
+actor User
+participant "Store Service" as Store
+database "Store DB" as SDB
+participant "Bank Service" as Bank
+database "Bank DB" as BDB
+
+User -> Store: Запрос на покупку машины
+
+group Проверка статуса заявки
+    Store -> SDB: Запрос наличия заявки в статусе <Предзаказано>
+    SDB --> Store: Данные о наличии заявки
+    alt Заявка не в статусе <Предзаказано>
+        Store --> User: Ошибка - Заявка не в статусе <Предзаказано>
+        return
+    end
+end
+
+group Проверка на уже совершенную покупку
+    Store -> BDB: Проверка на уже совершенную покупку
+    BDB --> Store: Данные о покупке
+    opt Покупка уже была совершена
+        Store --> User: Ошибка - Покупка уже была совершена
+    end
+end
+
+group Оплата
+    Store -> Bank: Запрос на совершение оплаты
+    Bank -> BDB: Совершение оплаты
+    Store -> Bank: Запрос на проверку оплаты
+    Bank -> BDB: Запрос на проверку оплаты
+    BDB --> Bank: Данные об оплате
+    alt Ошибка оплаты
+        Store -> Store: Повторить операцию оплаты
+        return
+    else Оплата успешна
+        Store -> SDB: Обновить статус заявки на <Покупка завершена>
+        Store --> User: Подтверждение успешной покупки
+    end
+end
+@enduml

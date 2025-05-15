@@ -14,7 +14,7 @@ import static io.zonky.test.db.AutoConfigureEmbeddedDatabase.DatabaseProvider.ZO
 
 @SpringBootTest(classes = CityManagementApplication.class)
 @AutoConfigureMockMvc
-@AutoConfigureEmbeddedDatabase(provider = ZONKY)
+@AutoConfigureEmbeddedDatabase(provider = ZONKY, type = AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES)
 public abstract class BaseIntegrationTest {
     @Autowired
     protected MockMvc mockMvc;
