@@ -18,8 +18,8 @@ pipeline {
                 script {
                     sh '''
                         /opt/jmeter/bin/jmeter -n \
-                          -t ${WORKSPACE}/tests/load_test.jmx \
-                          -l ${WORKSPACE}/tests/results.jtl
+                          -t ${WORKSPACE}/load_testing/load_test.jmx \
+                          -l ${WORKSPACE}/load_testing/results.jtl
                     '''
                 }
             }
