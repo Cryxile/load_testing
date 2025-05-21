@@ -31,6 +31,7 @@ services:
     privileged: true
     ports:
       - 8070:8080
+      - 9280:9280
       - 50000:50000
     container_name: jenkins
     volumes:
