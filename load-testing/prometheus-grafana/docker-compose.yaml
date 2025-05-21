@@ -35,7 +35,7 @@ services:
     container_name: jenkins
     volumes:
       - jenkins_data:/var/jenkins_home
-      - /c/temp_test/jmeter/bin:/opt/jmeter
+      - /c/temp_test/jmeter:/opt/jmeter
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=true

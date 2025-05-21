@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        /opt/jmeter/jmeter -n \
+                        /opt/jmeter/bin/jmeter -n \
                           -t ${WORKSPACE}/load_testing/load_test.jmx \
                           -l ${WORKSPACE}/load_testing/results.jtl
                     '''
