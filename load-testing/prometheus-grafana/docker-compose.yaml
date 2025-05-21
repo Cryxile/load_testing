@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_INSTALL_PLUGINS: grafana-clock-panel
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    privileged: true
+    ports:
+      - 8070:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /c/temp_test/jmeter/bin:/opt/jmeter
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
+
+volumes:
+  grafana_data:
+  prometheus_data:
+  jenkins_data:
+
+networks:
+  monitoring:
+    driver: bridge
