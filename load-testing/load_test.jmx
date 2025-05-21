@@ -5,6 +5,8 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="STRESS Thread Group">
@@ -22,7 +24,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer">
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
           <intProp name="calcMode">1</intProp>
           <doubleProp>
             <name>throughput</name>
@@ -32,7 +34,7 @@
         </ConstantThroughputTimer>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create house w/ address">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/houses</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -75,8 +77,8 @@
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get address" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get address">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/addresses/${addressId}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -89,8 +91,8 @@
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get house" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get house">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/houses/${houseId}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -103,8 +105,8 @@
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create person w/ passport" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create person w/ passport">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/people</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -149,8 +151,8 @@
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create car" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create car">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/cars</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -191,8 +193,8 @@
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get person" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get person">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/people/${personId}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -205,8 +207,8 @@
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get passport" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get passport">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/passports/${passportId}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -219,8 +221,8 @@
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get car" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Get car">
+          <stringProp name="HTTPSampler.domain">192.168.1.241</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.path">/api/v1/cars/${carId}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -233,7 +235,7 @@
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">true</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -270,7 +272,7 @@
           <stringProp name="filename">C:\Program Files\apache-jmeter-5.6.3\bin\tests\CityManagement\stab test results\stress_mode\2result_tree.jmx</stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
