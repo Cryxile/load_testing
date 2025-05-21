@@ -2,7 +2,7 @@
    - job_name: 'jmeter'
      scrape_interval: 5s
      static_configs:
-        - targets: ['jenkins:9270']
+        - targets: ['jenkins:9280']
    - job_name: 'springboot-app'
      metrics_path: '/actuator/prometheus'
      static_configs:
